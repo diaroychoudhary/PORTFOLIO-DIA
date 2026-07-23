@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia Roy Choudhary — Portfolio</title>
+<meta name="description" content="Dia Roy Choudhary — B.Tech CSE (AI/ML) undergraduate, aspiring software engineer & developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav-mark">DRC<span class="nav-mark-dot">.</span></a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#about" data-nav>About</a>
+    <a href="#skills" data-nav>Skills</a>
+    <a href="#experience" data-nav>Experience</a>
+    <a href="#leadership" data-nav>Leadership</a>
+    <a href="#achievements" data-nav>Achievements</a>
+    <a href="#impact" data-nav>Impact</a>
+    <a href="#contact" data-nav>Contact</a>
+    <a href="assets/Dia-Roy-Choudhary-Resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a>
+  </nav>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+    </button>
+    <button class="burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" data-nav>About</a>
+  <a href="#skills" data-nav>Skills</a>
+  <a href="#experience" data-nav>Experience</a>
+  <a href="#leadership" data-nav>Leadership</a>
+  <a href="#achievements" data-nav>Achievements</a>
+  <a href="#impact" data-nav>Impact</a>
+  <a href="#contact" data-nav>Contact</a>
+  <a href="assets/Dia-Roy-Choudhary-Resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <canvas id="meshCanvas" class="mesh-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow"><span class="eyebrow-line"></span> First-year B.Tech CSE (AI/ML) &middot; Lucknow, India</p>
+      <h1 class="hero-title">
+        Dia Roy<br>Choudhary
+      </h1>
+      <p class="hero-role">
+        <span id="typedRole"></span><span class="type-caret">|</span>
+      </p>
+      <p class="hero-desc">
+        Building at the intersection of code and curiosity — HTML, CSS, JavaScript, Java and Python,
+        with a growing focus on artificial intelligence, machine learning, and responsible AI.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#experience" class="btn btn-ghost">View experience</a>
+        <a href="assets/Dia-Roy-Choudhary-Resume.pdf" download class="btn btn-ghost">Download resume ↓</a>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div class="stat">
+          <span class="stat-num" data-count="3">0</span>
+          <span class="stat-label">Internships</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-count="9">0</span>
+          <span class="stat-label">Awards &amp; Honours</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-count="5">0</span>
+          <span class="stat-label">Languages Spoken</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-count="1">0</span>
+          <span class="stat-label">MUN Position Held</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-portrait">
+      <div class="portrait-frame">
+        <img src="assets/dia-portrait.jpg" alt="Portrait of Dia Roy Choudhary" class="portrait-img">
+        <div class="portrait-tag">IVA KUTUM</div>
+      </div>
+      <div class="portrait-ring"></div>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+    <span></span> Scroll
+  </a>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section" id="about">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <p class="about-lede">
+      A first-year B.Tech CSE (AI/ML) student based in Lucknow, India, passionate about artificial
+      intelligence, machine learning and web development. Skilled in HTML, CSS, JavaScript, Java and
+      Python — eager to learn, build innovative solutions, and contribute through internships and
+      real-world projects.
+    </p>
+    <div class="about-side">
+      <div class="about-block">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="edu-year">2026 – 2031</div>
+          <div>
+            <div class="edu-name">Chandigarh University</div>
+            <div class="edu-detail">B.Tech, Computer Science &amp; Engineering (AI/ML)</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2010 – 2026</div>
+          <div>
+            <div class="edu-name">City Montessori School</div>
+            <div class="edu-detail">Nursery – Class 12th</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-block">
+        <h3>Languages</h3>
+        <div class="lang-list">
+          <div class="lang-row"><span>English</span><div class="lang-bar"><i style="--w:98%"></i></div></div>
+          <div class="lang-row"><span>Hindi</span><div class="lang-bar"><i style="--w:98%"></i></div></div>
+          <div class="lang-row"><span>Bengali</span><div class="lang-bar"><i style="--w:90%"></i></div></div>
+          <div class="lang-row"><span>Punjabi</span><div class="lang-bar"><i style="--w:45%"></i></div></div>
+          <div class="lang-row"><span>Spanish</span><div class="lang-bar"><i style="--w:35%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="section section-alt" id="skills">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills</h2>
+  </div>
+  <p class="section-intro">
+    An interactive map of what she works with. Hover or drag a node to see how it connects —
+    tap a category chip to filter.
+  </p>
+
+  <div class="skills-chips" id="skillFilters">
+    <button class="chip active" data-filter="all">All</button>
+    <button class="chip" data-filter="lang">Languages</button>
+    <button class="chip" data-filter="web">Web</button>
+    <button class="chip" data-filter="ai">AI / ML</button>
+    <button class="chip" data-filter="other">Other</button>
+    <button class="chip" data-filter="soft">Soft Skills</button>
+  </div>
+
+  <div class="skills-canvas-wrap">
+    <canvas id="skillsCanvas"></canvas>
+    <div class="skills-tooltip" id="skillsTooltip"></div>
+  </div>
+
+  <div class="soft-skills-grid" id="softSkillsGrid"></div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="section" id="experience">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- ===== LEADERSHIP ===== -->
+<section class="section section-alt" id="leadership">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Leadership</h2>
+  </div>
+  <div class="leader-card">
+    <div class="leader-role">
+      <span class="leader-tag">CMSMUN STRD</span>
+      <h3>Under Secretary General — Logistics</h3>
+    </div>
+    <ul class="leader-list">
+      <li>Serving as USG – Logistics for CMSMUN STRD (Station Road).</li>
+      <li>Responsible for supporting event planning, logistics, coordination and organisational activities.</li>
+      <li>Worked with a team to help organise and coordinate a Model United Nations event.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== ACHIEVEMENTS ===== -->
+<section class="section" id="achievements">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Achievements &amp; Certifications</h2>
+  </div>
+
+  <div class="achieve-tabs">
+    <button class="tab-btn active" data-tab="awards">Awards</button>
+    <button class="tab-btn" data-tab="certs">Courses &amp; Certifications</button>
+    <button class="tab-btn" data-tab="extra">Extracurricular</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-awards">
+    <div class="award-grid" id="awardGrid"></div>
+  </div>
+
+  <div class="tab-panel" id="tab-certs">
+    <div class="cert-list" id="certList"></div>
+  </div>
+
+  <div class="tab-panel" id="tab-extra">
+    <div class="extra-grid">
+      <div class="extra-card">
+        <h4>Republic Day Parade / Drill</h4>
+        <ul>
+          <li>Performed in the Republic Day official parade at Vidhan Sabha.</li>
+          <li>Participated in the school's drill contingent for two consecutive years.</li>
+          <li>Demonstrated discipline, teamwork, commitment, coordination and dedication.</li>
+        </ul>
+      </div>
+      <div class="extra-card">
+        <h4>Debate &amp; Public Speaking</h4>
+        <ul>
+          <li>Participated in numerous debate competitions and won many of them.</li>
+          <li>Participated in the Frank Anthony Debate, a prestigious inter-school competition.</li>
+        </ul>
+      </div>
+      <div class="extra-card">
+        <h4>Spell Bee Championships</h4>
+        <ul>
+          <li>Received multiple appreciations in Spell Bee Championships during primary school.</li>
+        </ul>
+      </div>
+      <div class="extra-card">
+        <h4>Creative Writing</h4>
+        <ul>
+          <li>Participated in an International Creative Writing Competition.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL IMPACT ===== -->
+<section class="section section-alt" id="impact">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Social Impact &amp; Community Engagement</h2>
+  </div>
+  <div class="impact-row" id="impactRow"></div>
+</section>
+
+<!-- ===== INTERESTS ===== -->
+<section class="section" id="interests">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Interests</h2>
+  </div>
+  <div class="interest-cloud" id="interestCloud"></div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact-section" id="contact">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Let's connect</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p class="contact-lede">
+        Open to internships, collaborations, and conversations about AI, ML and web development.
+        Reach out — she reads every message.
+      </p>
+      <div class="contact-links">
+        <button class="contact-row" id="copyEmail" data-value="diaroy110620@gmail.com">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">diaroy110620@gmail.com</span>
+          <span class="contact-action">Copy</span>
+        </button>
+        <a class="contact-row" href="https://linkedin.com/in/dia-roy-choudhary" target="_blank" rel="noopener">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/dia-roy-choudhary</span>
+          <span class="contact-action">Open ↗</span>
+        </a>
+        <a class="contact-row" href="https://diaroychoudhary.github.io/MyPortfolio" target="_blank" rel="noopener">
+          <span class="contact-label">Portfolio</span>
+          <span class="contact-value">diaroychoudhary.github.io/MyPortfolio</span>
+          <span class="contact-action">Open ↗</span>
+        </a>
+        <div class="contact-row contact-row-static">
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Lucknow, India</span>
+          <span class="contact-action">—</span>
+        </div>
+        <a class="contact-row" href="assets/Dia-Roy-Choudhary-Resume.pdf" target="_blank" rel="noopener">
+          <span class="contact-label">Resume</span>
+          <span class="contact-value">View full resume (PDF)</span>
+          <span class="contact-action">Open ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <label for="fName">Name</label>
+        <input type="text" id="fName" required placeholder="Your name">
+      </div>
+      <div class="form-row">
+        <label for="fEmail">Email</label>
+        <input type="email" id="fEmail" required placeholder="you@example.com">
+      </div>
+      <div class="form-row">
+        <label for="fMsg">Message</label>
+        <textarea id="fMsg" rows="4" required placeholder="Say hello..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send message</button>
+      <p class="form-note" id="formNote">This form is a front-end demo — messages aren't actually sent. Use the email above to reach out directly.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>© <span id="year"></span> Dia Roy Choudhary. Built with care.</span>
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
