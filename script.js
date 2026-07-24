@@ -68,33 +68,30 @@ document.addEventListener('DOMContentLoaded', () => {
       'Coding & Web Development', 'AI & Machine Learning', 'Learning New Programming Languages',
       'Creative Writing & Reading Novels', 'Dancing / Bharatanatyam', 'Social Media & Digital Marketing'
     ],
-    softSkills: [
-      'Leadership','Communication','Teamwork & Collaboration','Critical / Higher-Order Thinking',
-      'Creativity & Creative Writing','Public Speaking & Debate','Event Organization & Coordination',
-      'Adaptability & Versatility','Time Management & Initiative','Interpersonal Skills',
-      'Willingness to Learn','Presentation Skills'
-    ],
-    skillNodes: [
-      { id:'java', label:'Java', cat:'lang', r:26 },
-      { id:'python', label:'Python', cat:'lang', r:28 },
-      { id:'js', label:'JavaScript', cat:'lang', r:27 },
-      { id:'html', label:'HTML', cat:'web', r:24 },
-      { id:'css', label:'CSS', cat:'web', r:24 },
-      { id:'ai', label:'Artificial Intelligence', cat:'ai', r:32 },
-      { id:'ml', label:'Machine Learning', cat:'ai', r:30 },
-      { id:'rai', label:'Responsible AI', cat:'ai', r:24 },
-      { id:'social', label:'Social Media Marketing', cat:'other', r:26 },
-      { id:'content', label:'Content Writing', cat:'other', r:24 },
-      { id:'problem', label:'Problem Solving', cat:'other', r:22 },
-      { id:'lead', label:'Leadership', cat:'soft', r:22 },
-      { id:'comm', label:'Communication', cat:'soft', r:22 },
-      { id:'debate', label:'Public Speaking', cat:'soft', r:22 }
-    ],
-    skillLinks: [
-      ['java','problem'],['python','ai'],['python','ml'],['js','html'],['js','css'],
-      ['html','css'],['ai','ml'],['ai','rai'],['ml','rai'],['social','content'],
-      ['content','comm'],['lead','comm'],['comm','debate'],['problem','ai'],['debate','lead'],
-      ['python','problem']
+    skills: [
+      { label:'Java', cat:'lang' },
+      { label:'Python', cat:'lang' },
+      { label:'JavaScript', cat:'lang' },
+      { label:'HTML', cat:'web' },
+      { label:'CSS', cat:'web' },
+      { label:'Artificial Intelligence', cat:'ai' },
+      { label:'Machine Learning', cat:'ai' },
+      { label:'Responsible AI', cat:'ai' },
+      { label:'Social Media Marketing', cat:'other' },
+      { label:'Content Writing', cat:'other' },
+      { label:'Problem Solving', cat:'other' },
+      { label:'Leadership', cat:'soft' },
+      { label:'Communication', cat:'soft' },
+      { label:'Teamwork & Collaboration', cat:'soft' },
+      { label:'Critical / Higher-Order Thinking', cat:'soft' },
+      { label:'Creativity & Creative Writing', cat:'soft' },
+      { label:'Public Speaking & Debate', cat:'soft' },
+      { label:'Event Organization & Coordination', cat:'soft' },
+      { label:'Adaptability & Versatility', cat:'soft' },
+      { label:'Time Management & Initiative', cat:'soft' },
+      { label:'Interpersonal Skills', cat:'soft' },
+      { label:'Willingness to Learn', cat:'soft' },
+      { label:'Presentation Skills', cat:'soft' }
     ]
   };
 
@@ -294,15 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
     interestCloud.appendChild(tag);
   });
 
-  /* ---------- BUILD SOFT SKILLS ---------- */
-  const softGrid = document.getElementById('softSkillsGrid');
-  DATA.softSkills.forEach(s=>{
-    const pill = document.createElement('div');
-    pill.className = 'soft-pill';
-    pill.innerHTML = `<i></i>${s}`;
-    softGrid.appendChild(pill);
-  });
-
   /* ---------- COPY EMAIL ---------- */
   const copyBtn = document.getElementById('copyEmail');
   const toast = document.createElement('div');
@@ -383,183 +371,57 @@ document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(drawMesh);
   window.addEventListener('resize', resizeMesh);
 
-  /* ---------- SKILLS NETWORK GRAPH ---------- */
-  const sc = document.getElementById('skillsCanvas');
-  const sctx = sc.getContext('2d');
-  const tooltip = document.getElementById('skillsTooltip');
-  const wrap = document.querySelector('.skills-canvas-wrap');
-  let sW, sH;
-  let nodes = [];
-  let links = DATA.skillLinks;
-  let activeFilter = 'all';
-  let dragNode = null, hoverNode = null;
-
-  const catColor = {
-    lang:  { light:'#1E1D1B', dark:'#F3F1EC' },
-    web:   { light:'#55534E', dark:'#C7C5C0' },
-    ai:    { light:'#1E1D1B', dark:'#F3F1EC' },
-    other: { light:'#8E8C86', dark:'#8E8C86' },
-    soft:  { light:'#A9A6A0', dark:'#6f6d67' }
+  /* ---------- SKILL ICONS ---------- */
+  const skillIcons = {
+    lang: '<path d="M8 4L3 12l5 8"/><path d="M16 4l5 8-5 8"/>',
+    web: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="6.5" r=".6" fill="currentColor" stroke="none"/>',
+    ai: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>',
+    other: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94Z"/>',
+    soft: '<circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15 20a5 5 0 0 1 8 0"/>'
   };
+  const catLabel = { lang:'Programming Language', web:'Web Development', ai:'AI / ML', other:'Other Skill', soft:'Soft Skill' };
 
-  function resizeSkills(){
-    sW = sc.width = wrap.clientWidth * devicePixelRatio;
-    sH = sc.height = wrap.clientHeight * devicePixelRatio;
-    sc.style.width = wrap.clientWidth+'px';
-    sc.style.height = wrap.clientHeight+'px';
-  }
-  function initNodes(){
-    nodes = DATA.skillNodes.map(n=>({
-      ...n,
-      x: Math.random()*sW*0.8 + sW*0.1,
-      y: Math.random()*sH*0.8 + sH*0.1,
-      vx: 0, vy: 0
-    }));
-  }
-  resizeSkills();
-  initNodes();
-
-  function visible(n){ return activeFilter==='all' || n.cat===activeFilter; }
-
-  function physicsStep(){
-    // gentle repulsion + link attraction + center pull
-    const cx = sW/2, cy = sH/2;
-    nodes.forEach(n=>{
-      if (n === dragNode) return;
-      let fx=0, fy=0;
-      nodes.forEach(o=>{
-        if (o===n) return;
-        const dx = n.x-o.x, dy = n.y-o.y;
-        const d2 = dx*dx+dy*dy || 1;
-        const d = Math.sqrt(d2);
-        const minD = (n.r+o.r+30)*devicePixelRatio;
-        if (d < minD){
-          const f = (minD-d)/minD * 0.6;
-          fx += (dx/d)*f; fy += (dy/d)*f;
-        }
-      });
-      links.forEach(([a,b])=>{
-        let other = null;
-        if (a===n.id) other = nodes.find(x=>x.id===b);
-        else if (b===n.id) other = nodes.find(x=>x.id===a);
-        if (other){
-          const dx = other.x-n.x, dy = other.y-n.y;
-          fx += dx*0.0025; fy += dy*0.0025;
-        }
-      });
-      fx += (cx-n.x)*0.0012; fy += (cy-n.y)*0.0012;
-      n.vx = (n.vx+fx)*0.82; n.vy = (n.vy+fy)*0.82;
-      n.x += n.vx; n.y += n.vy;
-      const pad = n.r*devicePixelRatio;
-      n.x = Math.max(pad, Math.min(sW-pad, n.x));
-      n.y = Math.max(pad, Math.min(sH-pad, n.y));
-    });
+  function svgIcon(cat){
+    return `<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">${skillIcons[cat]}</svg>`;
   }
 
-  function drawSkills(){
-    sctx.clearRect(0,0,sW,sH);
-    const dark = isDark();
-    const lineColor = dark ? '255,255,255' : '30,29,27';
+  /* ---------- BUILD SKILL CARDS ---------- */
+  const skillsGrid = document.getElementById('skillsGrid');
+  DATA.skills.forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.dataset.cat = s.cat;
+    card.innerHTML = `
+      <div class="skill-icon">${svgIcon(s.cat)}</div>
+      <div>
+        <div class="skill-name">${s.label}</div>
+        <div class="skill-cat">${catLabel[s.cat]}</div>
+      </div>
+    `;
+    skillsGrid.appendChild(card);
+  });
 
-    links.forEach(([a,b])=>{
-      const na = nodes.find(n=>n.id===a), nb = nodes.find(n=>n.id===b);
-      if (!na || !nb) return;
-      const fade = (visible(na) && visible(nb)) ? 0.28 : 0.05;
-      sctx.strokeStyle = `rgba(${lineColor},${fade})`;
-      sctx.lineWidth = devicePixelRatio;
-      sctx.beginPath(); sctx.moveTo(na.x,na.y); sctx.lineTo(nb.x,nb.y); sctx.stroke();
-    });
-
-    nodes.forEach(n=>{
-      const on = visible(n);
-      const col = catColor[n.cat][dark?'dark':'light'];
-      sctx.globalAlpha = on ? 1 : 0.12;
-      sctx.beginPath();
-      sctx.arc(n.x, n.y, n.r*devicePixelRatio*(n===hoverNode?1.12:1), 0, Math.PI*2);
-      sctx.fillStyle = dark ? '#1c1b18' : '#ffffff';
-      sctx.fill();
-      sctx.lineWidth = (n===hoverNode?2:1.2)*devicePixelRatio;
-      sctx.strokeStyle = col;
-      sctx.stroke();
-
-      sctx.fillStyle = col;
-      sctx.font = `${(n.cat==='lang'||n.cat==='ai'?11:10)*devicePixelRatio}px 'JetBrains Mono', monospace`;
-      sctx.textAlign = 'center'; sctx.textBaseline = 'middle';
-      // wrap long labels
-      const words = n.label.split(' ');
-      if (words.length > 1 && n.label.length > 10){
-        sctx.fillText(words[0], n.x, n.y - 6*devicePixelRatio);
-        sctx.fillText(words.slice(1).join(' '), n.x, n.y + 6*devicePixelRatio);
-      } else {
-        sctx.fillText(n.label, n.x, n.y);
+  const skillCardObserver = new IntersectionObserver((entries)=>{
+    entries.forEach((entry,i)=>{
+      if (entry.isIntersecting){
+        setTimeout(()=>entry.target.classList.add('show'), i*35);
+        skillCardObserver.unobserve(entry.target);
       }
-      sctx.globalAlpha = 1;
     });
-  }
-
-  function loopSkills(){
-    physicsStep();
-    drawSkills();
-    requestAnimationFrame(loopSkills);
-  }
-  requestAnimationFrame(loopSkills);
-  window.addEventListener('resize', ()=>{ resizeSkills(); });
-
-  function getPos(e){
-    const rect = sc.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x:(clientX-rect.left)*devicePixelRatio, y:(clientY-rect.top)*devicePixelRatio };
-  }
-  function nodeAt(pos){
-    return nodes.find(n=> visible(n) && Math.hypot(n.x-pos.x, n.y-pos.y) < n.r*devicePixelRatio);
-  }
-  sc.addEventListener('mousemove', e=>{
-    const pos = getPos(e);
-    if (dragNode){
-      dragNode.x = pos.x; dragNode.y = pos.y; dragNode.vx=0; dragNode.vy=0;
-      tooltip.style.left = e.clientX - wrap.getBoundingClientRect().left + 'px';
-      tooltip.style.top = e.clientY - wrap.getBoundingClientRect().top + 'px';
-      return;
-    }
-    const hit = nodeAt(pos);
-    hoverNode = hit || null;
-    if (hit){
-      tooltip.textContent = hit.label;
-      tooltip.classList.add('show');
-      tooltip.style.left = e.clientX - wrap.getBoundingClientRect().left + 'px';
-      tooltip.style.top = e.clientY - wrap.getBoundingClientRect().top + 'px';
-      sc.style.cursor = 'grab';
-    } else {
-      tooltip.classList.remove('show');
-      sc.style.cursor = 'default';
-    }
-  });
-  sc.addEventListener('mousedown', e=>{
-    const pos = getPos(e);
-    const hit = nodeAt(pos);
-    if (hit){ dragNode = hit; sc.style.cursor='grabbing'; }
-  });
-  window.addEventListener('mouseup', ()=>{ dragNode = null; });
-  sc.addEventListener('mouseleave', ()=>{ tooltip.classList.remove('show'); hoverNode=null; });
-
-  // touch support
-  sc.addEventListener('touchstart', e=>{
-    const pos = getPos(e);
-    const hit = nodeAt(pos);
-    if (hit) dragNode = hit;
-  }, { passive:true });
-  sc.addEventListener('touchmove', e=>{
-    if (dragNode){ const pos = getPos(e); dragNode.x = pos.x; dragNode.y = pos.y; dragNode.vx=0; dragNode.vy=0; }
-  }, { passive:true });
-  sc.addEventListener('touchend', ()=>{ dragNode = null; });
+  }, { threshold:.2 });
+  document.querySelectorAll('.skill-card').forEach(c=>skillCardObserver.observe(c));
 
   /* ---------- SKILL FILTER CHIPS ---------- */
   document.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click', ()=>{
       document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
       chip.classList.add('active');
-      activeFilter = chip.dataset.filter;
+      const filter = chip.dataset.filter;
+      document.querySelectorAll('.skill-card').forEach(card=>{
+        const match = filter === 'all' || card.dataset.cat === filter;
+        card.classList.toggle('hidden-card', !match);
+        if (match) card.classList.add('show');
+      });
     });
   });
 
